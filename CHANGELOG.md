@@ -2,6 +2,23 @@
 
 All notable changes to `adderall` are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [1.3.0] — 2026-04-21
+
+### Added
+- Published as the **`adderall`** npm package. Install on any supported platform with `npx adderall install <platform|all>`.
+- Node.js CLI (`bin/adderall.js`) implementing `install`, `uninstall`, `doctor`, `list`, `info`, and `help` — zero runtime dependencies, pure Node stdlib.
+- Per-platform adapters in `src/platforms.js` for Claude, Cursor, Codex, and Hermes.
+- `--project` scope flag (installs into `./.<platform>/skills` and `./AGENTS.md` for Codex).
+- `--link` dev mode flag (symlinks instead of copies for live editing).
+- Idempotent Codex `AGENTS.md` merge/strip between `<!-- adderall:begin -->` / `<!-- adderall:end -->` markers.
+
+### Removed
+- `scripts/install.sh` — superseded by the npx CLI.
+
+### Changed
+- README leads with `npx adderall install all` as the primary install method.
+- `INSTALL.md` rewritten around the npx flow; legacy manual paths retained as reference.
+
 ## [1.2.0] — 2026-04-21
 
 ### Added

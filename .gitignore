@@ -18,6 +18,10 @@ venv/
 # Node
 node_modules/
 
+# npm auth — NEVER commit these, even accidentally
+.npmrc
+*.tgz
+
 # Build artifacts
 dist/
 build/

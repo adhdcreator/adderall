@@ -1,0 +1,21 @@
+# Keep the published tarball lean.
+.git/
+.github/
+.vscode/
+.idea/
+node_modules/
+dist/
+docs/
+*.log
+
+# Local test artifacts
+coverage/
+.nyc_output/
+
+# npm auth — never ship
+.npmrc
+*.tgz
+
+# Don't ship raw editor files
+*.swp
+.DS_Store

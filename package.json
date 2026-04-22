@@ -1,0 +1,79 @@
+{
+  "name": "adderall",
+  "version": "1.3.0",
+  "description": "Dosage-based meta-skill pack for Claude, Cursor, Codex, and Hermes Agent. Control how strictly an agent follows another skill — not just what it does.",
+  "type": "module",
+  "bin": {
+    "adderall": "bin/adderall.js"
+  },
+  "main": "src/cli.js",
+  "exports": {
+    ".": "./src/cli.js",
+    "./skills": "./skills/",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "skills/",
+    "assets/banner.png",
+    "assets/bannerpills.png",
+    "assets/banner.txt",
+    "assets/banner.ans",
+    "assets/pills.txt",
+    "assets/pills.ans",
+    "templates/",
+    "AUTHORING.md",
+    "CHANGELOG.md",
+    "INSTALL.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "adderall": "node bin/adderall.js",
+    "doctor": "node bin/adderall.js doctor",
+    "list": "node bin/adderall.js list",
+    "test": "node bin/adderall.js doctor && node bin/adderall.js list"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "adderall",
+    "skills",
+    "agent",
+    "agent-skills",
+    "claude",
+    "claude-code",
+    "claude-skills",
+    "cursor",
+    "cursor-skills",
+    "codex",
+    "codex-cli",
+    "hermes",
+    "hermes-agent",
+    "prompt-engineering",
+    "dosage",
+    "meta-skill",
+    "adherence",
+    "flexibility",
+    "cli",
+    "npx"
+  ],
+  "author": {
+    "name": "adhdcreator",
+    "url": "https://github.com/adhdcreator"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/adhdcreator/adderall#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adhdcreator/adderall.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adhdcreator/adderall/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -5,30 +5,62 @@
 <h1 align="center">adderall</h1>
 
 <p align="center">
-  <em>A dosage-based meta-skill pack for <a href="https://hermes-agent.nousresearch.com">Hermes Agent</a>, <a href="https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview">Claude</a>, <a href="https://docs.cursor.com">Cursor</a>, and <a href="https://developers.openai.com/codex">Codex</a>.</em>
+  <em>A dosage-based meta-skill pack for <a href="https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview">Claude</a>, <a href="https://docs.cursor.com">Cursor</a>, <a href="https://developers.openai.com/codex">Codex</a>, and <a href="https://hermes-agent.nousresearch.com">Hermes Agent</a>.</em>
   <br/>
   <sub>Control <strong>how strictly</strong> an agent follows another skill &mdash; not just what it does.</sub>
 </p>
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/adderall"><img src="https://img.shields.io/npm/v/adderall?color=cc785c&label=npm&style=flat-square" alt="npm" /></a>
   <img src="https://img.shields.io/badge/skills-7-6e56cf?style=flat-square" alt="7 skills" />
   <img src="https://img.shields.io/badge/claude-compatible-cc785c?style=flat-square" alt="Claude compatible" />
   <img src="https://img.shields.io/badge/cursor-compatible-000000?style=flat-square" alt="Cursor compatible" />
   <img src="https://img.shields.io/badge/codex-compatible-10a37f?style=flat-square" alt="Codex compatible" />
   <img src="https://img.shields.io/badge/hermes-compatible-0b0b0b?style=flat-square" alt="Hermes compatible" />
+  <img src="https://img.shields.io/badge/node-%E2%89%A518-43853d?style=flat-square" alt="node >=18" />
   <img src="https://img.shields.io/badge/license-MIT-000?style=flat-square" alt="MIT license" />
   <img src="https://img.shields.io/badge/author-adhdcreator-ff4f81?style=flat-square" alt="Author: adhdcreator" />
 </p>
 
 ---
 
-## Overview
+## Install in one line
 
-Most skill libraries describe **what** an agent should do. They rarely describe **how strictly** it should do it.
+```bash
+npx adderall install all
+```
 
-`adderall` adds a thin, reusable control layer on top of any existing skill. Each dosage is itself a skill that modulates the agent's adherence and flexibility when executing a *target* skill. The same base skill can then be used with different behavioral lenses &mdash; exploratory on `5mg`, literal on `30mg` &mdash; without duplicating instructions.
+That's it. No clone, no build step, no Python, no Docker. The CLI ships the seven `SKILL.md` files inside the npm package and copies them to the correct location for each platform.
 
-A single `SKILL.md` per dosage ships with YAML frontmatter that satisfies Claude, Cursor, Codex, and Hermes Agent simultaneously. No per-platform forks.
+Prefer to pick platforms individually:
+
+```bash
+npx adderall install claude        # → ~/.claude/skills/adderall-<dose>
+npx adderall install cursor        # → ~/.cursor/skills/adderall-<dose>
+npx adderall install codex         # → ~/.codex/skills/ + AGENTS.md block
+npx adderall install hermes        # → ~/.hermes/skills/adderall-<dose>
+```
+
+Pin adderall to the current repo instead of the user profile:
+
+```bash
+npx adderall install cursor --project     # → ./.cursor/skills/adderall-<dose>
+npx adderall install codex  --project     # → ./.codex/skills/ + ./AGENTS.md block
+```
+
+Remove cleanly:
+
+```bash
+npx adderall uninstall all
+```
+
+Audit what's installed and where:
+
+```bash
+npx adderall doctor
+```
+
+See `npx adderall help` for every command. Detailed per-platform rules live in [`INSTALL.md`](./INSTALL.md).
 
 ## RX Shelf
 
@@ -64,38 +96,17 @@ At runtime:
 2. It sets the expected **adherence** (how literally instructions must be followed) and **flexibility** (how much initiative the agent may take).
 3. The agent executes the target skill through that behavioral lens &mdash; no edits to the target skill required.
 
-## Install
+## One SKILL.md, Four Platforms
 
-The install script links `skills/adderall-*` into each platform's expected location. No files are copied or duplicated &mdash; the same `SKILL.md` source of truth is shared across all platforms.
-
-```bash
-# Install on all supported platforms
-./scripts/install.sh all
-
-# Or install per platform
-./scripts/install.sh claude        # Claude Code / Claude Desktop
-./scripts/install.sh cursor        # Cursor (user-level skills)
-./scripts/install.sh codex         # Codex CLI (~/.codex/skills + AGENTS.md merge)
-./scripts/install.sh hermes        # Hermes Agent
-```
-
-Uninstall cleanly with:
-
-```bash
-./scripts/install.sh uninstall <platform>
-```
-
-See [`INSTALL.md`](./INSTALL.md) for per-platform paths, manual steps, and how adderall conforms to each platform's `SKILL.md` spec.
-
-### Quick reference
+A single `SKILL.md` per dosage is valid on every supported platform. No per-platform forks; no duplicate content. Each platform reads the fields it understands and ignores the rest.
 
 | Platform            | Skills path                               | Activation                                                  |
 | ------------------- | ----------------------------------------- | ----------------------------------------------------------- |
 | **Claude Code**     | `~/.claude/skills/adderall-<dose>/`       | Auto-loaded; matches description triggers                   |
-| **Claude Desktop**  | Upload `.zip` per skill via the UI        | Toggle in the skill panel                                   |
+| **Claude Desktop**  | Upload a `.zip` per skill via the UI      | Toggle in the skill panel                                   |
 | **Cursor**          | `~/.cursor/skills/adderall-<dose>/`       | Listed in the skill picker / slash menu                     |
-| **Codex CLI**       | `~/.codex/skills/adderall-<dose>/` + `AGENTS.md` include | Auto-loaded from the skills directory             |
-| **Hermes Agent**    | `hermes skills tap add adhdcreator/adderall` | `hermes skills install adderall-10mg`                    |
+| **Codex CLI**       | `~/.codex/skills/adderall-<dose>/` + `AGENTS.md` block | Auto-loaded; `/adderall-<dose>` triggers execution   |
+| **Hermes Agent**    | `~/.hermes/skills/adderall-<dose>/`       | `hermes skills list`                                        |
 
 ## Choosing a Dosage
 
@@ -103,40 +114,30 @@ See [`INSTALL.md`](./INSTALL.md) for per-platform paths, manual steps, and how a
 - **Mid dosage (`10mg`)** &mdash; prefer when the target skill should be respected but not over-applied.
 - **High dosages (`12.5mg` &rarr; `30mg`)** &mdash; prefer when consistency, repeatability, and literal compliance matter more than initiative.
 
-## Repository Structure
+## CLI Reference
 
 ```text
-adderall/
-├── skills/
-│   ├── adderall-5mg/SKILL.md
-│   ├── adderall-7.5mg/SKILL.md
-│   ├── adderall-10mg/SKILL.md
-│   ├── adderall-12.5mg/SKILL.md
-│   ├── adderall-15mg/SKILL.md
-│   ├── adderall-20mg/SKILL.md
-│   └── adderall-30mg/SKILL.md
-├── scripts/
-│   └── install.sh               # Links skills into Claude/Cursor/Codex/Hermes
-├── templates/
-│   └── SKILL.template.md        # Canonical SKILL.md scaffold
-├── assets/
-│   ├── banner.png               # Top banner (pharmacy-grade cover art)
-│   ├── bannerpills.png          # RX shelf — one bottle per dosage
-│   ├── banner.txt / .ans        # CP437 ASCII variants
-│   └── pills.txt / .ans         # CP437 pill-rack variants
-├── docs/                        # Extended design notes
-├── AUTHORING.md                 # How skills in this repo are authored
-├── CHANGELOG.md
-├── INSTALL.md                   # Per-platform install guide
-├── LICENSE                      # MIT, (c) adhdcreator
-└── README.md
-```
+npx adderall <command> [options]
 
-All skills in this repository are authored by **[adhdcreator](https://github.com/adhdcreator)**. External contributions are not accepted; issues and discussions are welcome.
+Commands:
+  install <platform>        Install adderall on a platform (or 'all')
+  uninstall <platform>      Remove adderall from a platform (or 'all')
+  doctor                    Report where adderall is installed
+  list                      List the 7 dosages and their profiles
+  info <dose>               Print a dosage's SKILL.md
+  help                      Show the full help screen
+
+Options:
+  --project                 Install at project scope (./.<platform>/skills)
+  --link                    Use symlinks instead of copies (dev mode)
+
+Platforms:
+  claude, cursor, codex, hermes, all
+```
 
 ## SKILL.md Format
 
-Every skill uses a single unified frontmatter that is valid on all four target platforms. Claude and Cursor read the top-level `name` and `description`; Hermes additionally reads `metadata.hermes`; Codex reads the description and includes the body via `AGENTS.md`.
+Every skill uses a single unified frontmatter that is valid on all four target platforms:
 
 ```yaml
 ---
@@ -152,7 +153,46 @@ metadata:
 ---
 ```
 
-See [`templates/SKILL.template.md`](templates/SKILL.template.md) for the full scaffold, [`AUTHORING.md`](AUTHORING.md) for conventions, and [`INSTALL.md`](INSTALL.md) for how each platform consumes this frontmatter.
+- **Claude / Cursor** read the top-level `name` and `description` and treat the body as instructions. Extra fields are ignored.
+- **Codex** reads the description via the `AGENTS.md` block; skill bodies are accessible under `~/.codex/skills/`.
+- **Hermes** reads the full frontmatter including `metadata.hermes.tags` and `related_skills`.
+
+See [`templates/SKILL.template.md`](templates/SKILL.template.md) for the scaffold, [`AUTHORING.md`](AUTHORING.md) for conventions, and [`INSTALL.md`](INSTALL.md) for the exact rules each platform enforces.
+
+## Repository Structure
+
+```text
+adderall/
+├── bin/
+│   └── adderall.js              # CLI entry point (published as `adderall` bin)
+├── src/
+│   ├── cli.js                   # argv parser + command dispatcher
+│   ├── logger.js                # zero-dep ANSI logger
+│   ├── fsutil.js                # zero-dep fs helpers (copy / symlink / rm)
+│   └── platforms.js             # claude + cursor + codex + hermes adapters
+├── skills/
+│   ├── adderall-5mg/SKILL.md
+│   ├── adderall-7.5mg/SKILL.md
+│   ├── adderall-10mg/SKILL.md
+│   ├── adderall-12.5mg/SKILL.md
+│   ├── adderall-15mg/SKILL.md
+│   ├── adderall-20mg/SKILL.md
+│   └── adderall-30mg/SKILL.md
+├── templates/
+│   └── SKILL.template.md
+├── assets/
+│   ├── banner.png               # Top banner (pharmacy-grade cover art)
+│   ├── bannerpills.png          # RX shelf — one bottle per dosage
+│   └── {banner,pills}.{txt,ans} # CP437 ASCII fallbacks
+├── AUTHORING.md                 # How skills in this repo are authored
+├── CHANGELOG.md
+├── INSTALL.md                   # Detailed per-platform install guide
+├── LICENSE                      # MIT, (c) adhdcreator
+├── package.json                 # npm manifest (bin: "adderall")
+└── README.md
+```
+
+All skills in this repository are authored by **[adhdcreator](https://github.com/adhdcreator)**. External contributions are not accepted; issues and discussions are welcome.
 
 ## Philosophy
 
