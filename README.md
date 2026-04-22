@@ -1,20 +1,21 @@
-<!-- Hero banner (PNG — replaces ASCII/ANSI art) -->
-
 <p align="center">
-  <img src="banner.png" alt="adderall — pharmacy-grade prompt fuel" width="100%" />
+  <img src="assets/banner.png" alt="ADDERALL PILLS — pharmacy grade prompt fuel" width="100%" />
 </p>
 
 <h1 align="center">adderall</h1>
 
 <p align="center">
-  <em>A dosage-based meta-skill pack for <a href="https://hermes-agent.nousresearch.com">Hermes Agent</a>.</em>
+  <em>A dosage-based meta-skill pack for <a href="https://hermes-agent.nousresearch.com">Hermes Agent</a>, <a href="https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview">Claude</a>, <a href="https://docs.cursor.com">Cursor</a>, and <a href="https://developers.openai.com/codex">Codex</a>.</em>
   <br/>
   <sub>Control <strong>how strictly</strong> an agent follows another skill &mdash; not just what it does.</sub>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/hermes--agent-compatible-0b0b0b?style=flat-square" alt="Hermes Agent compatible" />
   <img src="https://img.shields.io/badge/skills-7-6e56cf?style=flat-square" alt="7 skills" />
+  <img src="https://img.shields.io/badge/claude-compatible-cc785c?style=flat-square" alt="Claude compatible" />
+  <img src="https://img.shields.io/badge/cursor-compatible-000000?style=flat-square" alt="Cursor compatible" />
+  <img src="https://img.shields.io/badge/codex-compatible-10a37f?style=flat-square" alt="Codex compatible" />
+  <img src="https://img.shields.io/badge/hermes-compatible-0b0b0b?style=flat-square" alt="Hermes compatible" />
   <img src="https://img.shields.io/badge/license-MIT-000?style=flat-square" alt="MIT license" />
   <img src="https://img.shields.io/badge/author-adhdcreator-ff4f81?style=flat-square" alt="Author: adhdcreator" />
 </p>
@@ -25,12 +26,14 @@
 
 Most skill libraries describe **what** an agent should do. They rarely describe **how strictly** it should do it.
 
-`adderall` adds a thin, reusable control layer on top of any existing Hermes skill. Each dosage is itself a skill that modulates the agent's adherence and flexibility when executing a *target* skill. The same base skill can then be used with different behavioral lenses &mdash; exploratory on `5mg`, literal on `30mg` &mdash; without duplicating instructions.
+`adderall` adds a thin, reusable control layer on top of any existing skill. Each dosage is itself a skill that modulates the agent's adherence and flexibility when executing a *target* skill. The same base skill can then be used with different behavioral lenses &mdash; exploratory on `5mg`, literal on `30mg` &mdash; without duplicating instructions.
+
+A single `SKILL.md` per dosage ships with YAML frontmatter that satisfies Claude, Cursor, Codex, and Hermes Agent simultaneously. No per-platform forks.
 
 ## RX Shelf
 
 <p align="center">
-  <img src="bannerpills.png" alt="adderall dosage RX shelf — 5mg through 30mg" width="720" />
+  <img src="assets/bannerpills.png" alt="adderall pills rack — one bottle per dosage" width="100%" />
 </p>
 
 ## Dosage Guide
@@ -61,6 +64,39 @@ At runtime:
 2. It sets the expected **adherence** (how literally instructions must be followed) and **flexibility** (how much initiative the agent may take).
 3. The agent executes the target skill through that behavioral lens &mdash; no edits to the target skill required.
 
+## Install
+
+The install script links `skills/adderall-*` into each platform's expected location. No files are copied or duplicated &mdash; the same `SKILL.md` source of truth is shared across all platforms.
+
+```bash
+# Install on all supported platforms
+./scripts/install.sh all
+
+# Or install per platform
+./scripts/install.sh claude        # Claude Code / Claude Desktop
+./scripts/install.sh cursor        # Cursor (user-level skills)
+./scripts/install.sh codex         # Codex CLI (~/.codex/skills + AGENTS.md merge)
+./scripts/install.sh hermes        # Hermes Agent
+```
+
+Uninstall cleanly with:
+
+```bash
+./scripts/install.sh uninstall <platform>
+```
+
+See [`INSTALL.md`](./INSTALL.md) for per-platform paths, manual steps, and how adderall conforms to each platform's `SKILL.md` spec.
+
+### Quick reference
+
+| Platform            | Skills path                               | Activation                                                  |
+| ------------------- | ----------------------------------------- | ----------------------------------------------------------- |
+| **Claude Code**     | `~/.claude/skills/adderall-<dose>/`       | Auto-loaded; matches description triggers                   |
+| **Claude Desktop**  | Upload `.zip` per skill via the UI        | Toggle in the skill panel                                   |
+| **Cursor**          | `~/.cursor/skills/adderall-<dose>/`       | Listed in the skill picker / slash menu                     |
+| **Codex CLI**       | `~/.codex/skills/adderall-<dose>/` + `AGENTS.md` include | Auto-loaded from the skills directory             |
+| **Hermes Agent**    | `hermes skills tap add adhdcreator/adderall` | `hermes skills install adderall-10mg`                    |
+
 ## Choosing a Dosage
 
 - **Low dosages (`5mg`, `7.5mg`)** &mdash; prefer when you want optional ideas, broader exploration, or creative extensions beyond the target skill.
@@ -71,8 +107,6 @@ At runtime:
 
 ```text
 adderall/
-├── banner.png                 # Hero banner (README)
-├── bannerpills.png            # RX shelf / pills graphic (README)
 ├── skills/
 │   ├── adderall-5mg/SKILL.md
 │   ├── adderall-7.5mg/SKILL.md
@@ -81,77 +115,50 @@ adderall/
 │   ├── adderall-15mg/SKILL.md
 │   ├── adderall-20mg/SKILL.md
 │   └── adderall-30mg/SKILL.md
+├── scripts/
+│   └── install.sh               # Links skills into Claude/Cursor/Codex/Hermes
 ├── templates/
 │   └── SKILL.template.md        # Canonical SKILL.md scaffold
 ├── assets/
-│   ├── banner.txt               # Plain CP437 banner
-│   ├── banner.ans               # ANSI-colored banner (cat in a terminal)
-│   ├── pills.txt                # Plain CP437 pill rack
-│   └── pills.ans                # ANSI-colored pill rack
+│   ├── banner.png               # Top banner (pharmacy-grade cover art)
+│   ├── bannerpills.png          # RX shelf — one bottle per dosage
+│   ├── banner.txt / .ans        # CP437 ASCII variants
+│   └── pills.txt / .ans         # CP437 pill-rack variants
 ├── docs/                        # Extended design notes
 ├── AUTHORING.md                 # How skills in this repo are authored
 ├── CHANGELOG.md
+├── INSTALL.md                   # Per-platform install guide
 ├── LICENSE                      # MIT, (c) adhdcreator
 └── README.md
 ```
 
 All skills in this repository are authored by **[adhdcreator](https://github.com/adhdcreator)**. External contributions are not accepted; issues and discussions are welcome.
 
-## Preview in a Terminal
-
-```bash
-# Full-color CP437 banner
-cat assets/banner.ans
-
-# Full-color RX shelf
-cat assets/pills.ans
-
-# Plain (no color)
-cat assets/banner.txt
-cat assets/pills.txt
-```
-
-## Installation
-
-Install any dosage skill directly from this repo with the Hermes CLI:
-
-```bash
-hermes skills tap add adhdcreator/adderall
-hermes skills install adderall-10mg
-```
-
-Or install the full pack:
-
-```bash
-hermes skills install adderall-5mg adderall-7.5mg adderall-10mg \
-                      adderall-12.5mg adderall-15mg adderall-20mg adderall-30mg
-```
-
 ## SKILL.md Format
 
-All skills in this repo follow the canonical [Hermes Agent SKILL.md format](https://hermes-agent.nousresearch.com/docs/developer-guide/creating-skills):
+Every skill uses a single unified frontmatter that is valid on all four target platforms. Claude and Cursor read the top-level `name` and `description`; Hermes additionally reads `metadata.hermes`; Codex reads the description and includes the body via `AGENTS.md`.
 
 ```yaml
 ---
 name: adderall-10mg
-description: Balanced execution dosage &mdash; adherence 0.50, flexibility 0.50.
+description: Balanced execution dosage — adherence 0.50, flexibility 0.50. Use when the user prefixes a target skill with /adderall-10mg.
 version: 1.0.0
 author: adhdcreator
 license: MIT
 metadata:
   hermes:
     tags: [Meta, Control, Dosage, adderall]
-    related_skills: [adderall-5mg, adderall-20mg, adderall-30mg]
+    related_skills: [adderall-7.5mg, adderall-12.5mg]
 ---
 ```
 
-See [`templates/SKILL.template.md`](templates/SKILL.template.md) for the full scaffold, and [`AUTHORING.md`](AUTHORING.md) for the conventions used across the pack.
+See [`templates/SKILL.template.md`](templates/SKILL.template.md) for the full scaffold, [`AUTHORING.md`](AUTHORING.md) for conventions, and [`INSTALL.md`](INSTALL.md) for how each platform consumes this frontmatter.
 
 ## Philosophy
 
 > A skill tells the agent *what* to do. A dosage tells the agent *how much of itself* to bring to it.
 
-`adderall` treats adherence as a first-class, tunable parameter &mdash; the same way temperature tunes sampling. This keeps target skills pure (no scattered "be strict" / "be creative" flags) and makes agent behavior reproducible across sessions and users.
+`adderall` treats adherence as a first-class, tunable parameter &mdash; the same way temperature tunes sampling. This keeps target skills pure (no scattered "be strict" / "be creative" flags) and makes agent behavior reproducible across sessions, users, and platforms.
 
 ## License
 

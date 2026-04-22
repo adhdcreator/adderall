@@ -2,10 +2,18 @@
 
 All notable changes to `adderall` are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
-## [1.1.1] — 2026-04-21
+## [1.2.0] — 2026-04-21
+
+### Added
+- Multi-platform installer at [`scripts/install.sh`](./scripts/install.sh) with `claude`, `claude-zip`, `cursor`, `codex`, `hermes`, `all`, `uninstall`, and `doctor` subcommands.
+- Project-scope variants (`--project`) for Claude, Cursor, and Codex.
+- Codex integration via a delimited, idempotent `<!-- adderall:begin --> ... <!-- adderall:end -->` block merged into `AGENTS.md`.
+- [`INSTALL.md`](./INSTALL.md) documenting each platform's `SKILL.md` rules, install paths, and manual steps.
+- Pharmacy-grade PNG cover art (`assets/banner.png`) and labelled pill shelf (`assets/bannerpills.png`) now rendered at the top of the README.
 
 ### Changed
-- README hero and RX shelf now use `banner.png` and `bannerpills.png` instead of embedded ANSI art.
+- README replaces the embedded ANSI banner and ANSI pill rack with the PNG cover art.
+- README now advertises compatibility with Claude, Cursor, Codex, and Hermes (single `SKILL.md` source of truth, no per-platform forks).
 
 ## [1.1.0] — 2026-04-21
 
