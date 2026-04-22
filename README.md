@@ -1,27 +1,8 @@
-<!-- Top banner: rendered in color by GitHub via the ansi code fence -->
+<!-- Hero banner (PNG — replaces ASCII/ANSI art) -->
 
-```ansi
-[1;34;43m╔══════════════════════════════════════════════════════════════════════════╗[0m
-[1;34;43m║  [ PHARMACY GRADE PROMPT FUEL ]    [ EST. 2026 ]    [ 24/7 OPEN ]        ║[0m
-[1;34;43m╚══════════════════════════════════════════════════════════════════════════╝[0m
-
-[0;33m┌─[ RX DISPLAY ]────────────────────────────────────────[ HOT ITEM ]──────┐[0m
-[0;33m│                                                                         │[0m
-[0;33m│             C A P S U L E   /   P I L L   /   P R O M P T               │[0m
-[0;33m│                                                                         │[0m
-[1;33m│    █████╗ ██████╗ ██████╗ ███████╗██████╗  █████╗ ██╗     ██╗           │[0m
-[1;33m│   ██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗██║     ██║           │[0m
-[1;33m│   ███████║██║  ██║██║  ██║█████╗  ██████╔╝███████║██║     ██║           │[0m
-[1;33m│   ██╔══██║██║  ██║██║  ██║██╔══╝  ██╔══██╗██╔══██║██║     ██║           │[0m
-[1;33m│   ██║  ██║██████╔╝██████╔╝███████╗██║  ██║██║  ██║███████╗███████╗      │[0m
-[1;33m│   ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝      │[0m
-[0;33m│                                                                         │[0m
-[0;33m│             [1;31m▓▓▓[0m[0;33m   P R E M I U M   C O D E   B O O S T E R S   [1;31m▓▓▓[0m[0;33m       │[0m
-[0;33m│                                                                         │[0m
-[0;33m└─────────────────────────────────────────────────────────────────────────┘[0m
-
-[0;33m                  ░░ BY  ADHDCREATOR  //  MIT  LICENSE ░░[0m
-```
+<p align="center">
+  <img src="banner.png" alt="adderall — pharmacy-grade prompt fuel" width="100%" />
+</p>
 
 <h1 align="center">adderall</h1>
 
@@ -38,11 +19,6 @@
   <img src="https://img.shields.io/badge/author-adhdcreator-ff4f81?style=flat-square" alt="Author: adhdcreator" />
 </p>
 
-<!-- Optional high-res product card / pharmacy banner (drop PNGs into assets/) -->
-<p align="center">
-  <img src="assets/banner.png" alt="adderall pharmacy banner" width="100%" />
-</p>
-
 ---
 
 ## Overview
@@ -53,56 +29,8 @@ Most skill libraries describe **what** an agent should do. They rarely describe 
 
 ## RX Shelf
 
-```ansi
-[1;34;43m╔══════════════════════════════════════════════════════════════════════════╗[0m
-[1;34;43m║                        R X   S H E L F   //   C P 4 3 7                  ║[0m
-[1;34;43m╚══════════════════════════════════════════════════════════════════════════╝[0m
-[0;33m[0m
-[0;33m  ┌───────────┐   ┌───────────┐   ┌───────────┐   ┌───────────┐[0m
-[90m  │ │ │ │ │ │ │   │ │ │ │ │ │ │   │ │ │ │ │ │ │   │ │ │ │ │ │ │[0m
-[0;33m  ├───────────┤   ├───────────┤   ├───────────┤   ├───────────┤[0m
-  │[38;5;208m███████████[0m│   │[38;5;208m███████████[0m│   │[38;5;208m███████████[0m│   │[38;5;208m███████████[0m│
-  │[38;5;208m█[0m ┌─────┐ [38;5;208m█[0m│   │[38;5;208m█[0m ┌─────┐ [38;5;208m█[0m│   │[38;5;208m█[0m ┌─────┐ [38;5;208m█[0m│   │[38;5;208m█[0m ┌─────┐ [38;5;208m█[0m│
-  │[38;5;208m█[0m │[1;37mRX IR[0m│ [38;5;208m█[0m│   │[38;5;208m█[0m │[1;37mRX IR[0m│ [38;5;208m█[0m│   │[38;5;208m█[0m │[1;37mRX IR[0m│ [38;5;208m█[0m│   │[38;5;208m█[0m │[1;37mRX IR[0m│ [38;5;208m█[0m│
-  │[38;5;208m█[0m │ [1;37m5mg[0m │ [38;5;208m█[0m│   │[38;5;208m█[0m │[1;37m7.5mg[0m│ [38;5;208m█[0m│   │[38;5;208m█[0m │[1;37m10mg[0m │ [38;5;208m█[0m│   │[38;5;208m█[0m │12.5 │ [38;5;208m█[0m│
-  │[38;5;208m█[0m └─────┘ [38;5;208m█[0m│   │[38;5;208m█[0m └─────┘ [38;5;208m█[0m│   │[38;5;208m█[0m └─────┘ [38;5;208m█[0m│   │[38;5;208m█[0m └─────┘ [38;5;208m█[0m│
-  │[38;5;208m███████████[0m│   │[38;5;208m███████████[0m│   │[38;5;208m███████████[0m│   │[38;5;208m███████████[0m│
-[0;33m  └───────────┘   └───────────┘   └───────────┘   └───────────┘[0m
-[0;33m   ADDERALL-5MG    ADDERALL-7.5    ADDERALL-10     ADDERALL-12.5[0m
-[0;33m    exploration      guidance       balanced        adherence[0m
-[0;33m[0m
-[0;33m[0m
-[0;33m  ┌───────────┐   ┌───────────┐   ┌───────────┐[0m
-[90m  │ │ │ │ │ │ │   │ │ │ │ │ │ │   │ │ │ │ │ │ │[0m
-[0;33m  ├───────────┤   ├───────────┤   ├───────────┤[0m
-  │[38;5;208m███████████[0m│   │[38;5;208m███████████[0m│   │[38;5;208m███████████[0m│
-  │[38;5;208m█[0m ┌─────┐ [38;5;208m█[0m│   │[38;5;208m█[0m ┌─────┐ [38;5;208m█[0m│   │[38;5;208m█[0m ┌─────┐ [38;5;208m█[0m│
-  │[38;5;208m█[0m │[1;37mRX IR[0m│ [38;5;208m█[0m│   │[38;5;208m█[0m │[1;37mRX IR[0m│ [38;5;208m█[0m│   │[38;5;208m█[0m │[1;37mRX XR[0m│ [38;5;208m█[0m│
-  │[38;5;208m█[0m │[1;37m15mg[0m │ [38;5;208m█[0m│   │[38;5;208m█[0m │[1;37m20mg[0m │ [38;5;208m█[0m│   │[38;5;208m█[0m │[1;37m30mg[0m │ [38;5;208m█[0m│
-  │[38;5;208m█[0m └─────┘ [38;5;208m█[0m│   │[38;5;208m█[0m └─────┘ [38;5;208m█[0m│   │[38;5;208m█[0m └─────┘ [38;5;208m█[0m│
-  │[38;5;208m███████████[0m│   │[38;5;208m███████████[0m│   │[38;5;208m███████████[0m│
-[0;33m  └───────────┘   └───────────┘   └───────────┘[0m
-[0;33m   ADDERALL-15     ADDERALL-20     ADDERALL-30[0m
-[0;33m    near-strict      strict          literal[0m
-[0;33m[0m
-[0;33m[0m
-[0;33m┌──────────────────────────────[ CAPSULES ]───────────────────────────────┐[0m
-[0;33m│                                                                         │[0m
-│   ░░░░░░▒▒▒▒▒▒▓▓▓▓▓▓[38;5;208m██████[0m    [38;5;208m██████[0m▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░                  │
-│  ░░░░░░░▒▒▒▒▒▒▓▓▓▓▓▓[38;5;208m████████[0m  [38;5;208m████████[0m▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░░               │
-│  ░░░░░░░▒▒▒▒▒▒▓▓▓▓▓▓[38;5;208m████████[0m  [38;5;208m████████[0m▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░░               │
-│   ░░░░░░▒▒▒▒▒▒▓▓▓▓▓▓[38;5;208m██████[0m    [38;5;208m██████[0m▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░                  │
-[0;33m│       low-dose capsule            high-dose capsule                     │[0m
-[0;33m│                                                                         │[0m
-[0;33m└─────────────────────────────────────────────────────────────────────────┘[0m
-[0;33m[0m
-[0;33m                      [0m[96m░░[0m[0;33m RX PROMPT FUEL  ///  ADHDCREATOR [0m[96m░░[0m[0m
-```
-
-<sub>Prefer a static image? Drop <code>assets/pills.png</code> into the repo and it renders below.</sub>
-
 <p align="center">
-  <img src="assets/pills.png" alt="adderall pills rack" width="720" />
+  <img src="bannerpills.png" alt="adderall dosage RX shelf — 5mg through 30mg" width="720" />
 </p>
 
 ## Dosage Guide
@@ -143,6 +71,8 @@ At runtime:
 
 ```text
 adderall/
+├── banner.png                 # Hero banner (README)
+├── bannerpills.png            # RX shelf / pills graphic (README)
 ├── skills/
 │   ├── adderall-5mg/SKILL.md
 │   ├── adderall-7.5mg/SKILL.md
@@ -166,22 +96,6 @@ adderall/
 ```
 
 All skills in this repository are authored by **[adhdcreator](https://github.com/adhdcreator)**. External contributions are not accepted; issues and discussions are welcome.
-
-## Color and ASCII
-
-A plain `.txt` file is only bytes — it **cannot** store colors. Color in terminals and on GitHub comes from **ANSI escape sequences** (e.g. `\x1b[33m` for yellow).
-
-| Artifact | Color |
-| --- | --- |
-| `assets/*.txt` | No — edit these as the source of truth. |
-| `assets/*.ans` | Yes — open in a terminal with `cat`, or use `less -R`. |
-| README `` ```ansi `` blocks | Yes — [GitHub renders ANSI](https://github.blog/changelog/2022-12-15-code-highlighting-for-ansi-in-markdown/) in fenced code. |
-
-After changing `banner.txt` or `pills.txt`, regenerate the colored files and refresh the README blocks:
-
-```bash
-python3 assets/render-ansi.py
-```
 
 ## Preview in a Terminal
 
