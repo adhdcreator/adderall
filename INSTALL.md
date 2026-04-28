@@ -122,7 +122,7 @@ npx adderall install codex --project  # → ./.codex/skills + ./AGENTS.md
 The CLI writes this block into the target `AGENTS.md`:
 
 ```markdown
-<!-- adderall:begin v1.4.0 -->
+<!-- adderall:begin v1.4.2 -->
 ## adderall — dosage meta-skill pack
 
 Tool Attention gate:
@@ -145,7 +145,7 @@ Available dosages:
 
 Rerunning `install codex` is **idempotent**: it strips any existing `adderall:begin / adderall:end` block and rewrites a fresh one. Your other `AGENTS.md` content is preserved.
 
-Each installed dosage skill also includes its own `Attention Gate` and dosage-specific `Recovery Rules`, so platforms that read the full `SKILL.md` still get exact matching, lazy loading, state-aware continuation, and authority-boundary behavior.
+Each installed dosage skill also includes its own `Attention Gate`, `Tool Attention Protocol`, context budget, adversarial guard, and dosage-specific `Recovery Rules`, so platforms that read the full `SKILL.md` still get exact matching, lazy loading, state-aware continuation, and authority-boundary behavior.
 
 ---
 
@@ -193,7 +193,7 @@ npx adderall attention
 Example output:
 
 ```text
-==> adderall v1.4.0 — installation report
+==> adderall v1.4.2 — installation report
   Claude (user)     7/7     /home/alex/.claude/skills
   Claude (proj)     not installed  /home/alex/project/.claude/skills
   Cursor (user)     7/7     /home/alex/.cursor/skills

@@ -87,7 +87,17 @@ export async function buildAttentionReport(skillsDir, { codexBlockText = "" } = 
     addCheck(checks, text.includes("## Dosage Contract"), `${prefix}: dosage contract section exists`);
     addCheck(checks, text.includes("## Decision Policy"), `${prefix}: decision policy section exists`);
     addCheck(checks, text.includes("## Output Contract"), `${prefix}: output contract section exists`);
+    addCheck(checks, text.includes("## Tool Attention Protocol"), `${prefix}: tool attention protocol section exists`);
+    addCheck(checks, text.includes("## Context Budget"), `${prefix}: context budget section exists`);
+    addCheck(checks, text.includes("## Adversarial and Quality Guard"), `${prefix}: adversarial guard section exists`);
+    addCheck(checks, text.includes("## Gramaje Calibration"), `${prefix}: gramaje calibration section exists`);
+    addCheck(checks, text.includes("### Correct Shape"), `${prefix}: correct shape examples exist`);
+    addCheck(checks, text.includes("### Incorrect Shape"), `${prefix}: incorrect shape examples exist`);
+    addCheck(checks, text.includes("### Autonomy Limit"), `${prefix}: autonomy limit exists`);
     addCheck(checks, text.includes("## Recovery Rules"), `${prefix}: recovery rules section exists`);
+    addCheck(checks, text.includes("Phase 1 summary routing"), `${prefix}: phase 1 routing is explicit`);
+    addCheck(checks, text.includes("Phase 2 lazy loading"), `${prefix}: phase 2 lazy loading is explicit`);
+    addCheck(checks, text.includes("After-model gate"), `${prefix}: after-model gate is explicit`);
     addCheck(checks, text.includes("State-aware continuation"), `${prefix}: state-aware gating is explicit`);
     addCheck(checks, text.includes("Lazy loading"), `${prefix}: lazy loading is explicit`);
     addCheck(checks, text.includes(`activation: "/${tool.id} /<target-skill> <task>"`), `${prefix}: attention activation matches`);

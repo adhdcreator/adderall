@@ -2,6 +2,26 @@
 
 All notable changes to `adderall` are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [1.4.2] — 2026-04-28
+
+### Added
+- Expanded every dosage skill with gramaje-specific calibration examples, incorrect-shape examples, and explicit autonomy limits.
+- Expanded every dosage skill with paper-aligned Tool Attention protocol, context budget, after-model gate, and adversarial quality guard sections.
+
+### Changed
+- `adderall attention` now verifies the new paper-aligned sections in every dosage skill.
+- `adderall attention` now verifies gramaje calibration examples and autonomy limits.
+- Skill frontmatter versions bumped to `1.3.0`.
+
+## [1.4.1] — 2026-04-28
+
+### Added
+- Expanded every dosage skill with paper-aligned Tool Attention protocol, context budget, after-model gate, and adversarial quality guard sections.
+
+### Changed
+- `adderall attention` now verifies the new paper-aligned sections in every dosage skill.
+- Skill frontmatter versions bumped to `1.2.0`.
+
 ## [1.4.0] — 2026-04-28
 
 ### Added

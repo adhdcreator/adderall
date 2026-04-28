@@ -65,6 +65,10 @@ Every skill body must include:
 
 - `Attention Gate`, with exact dosage matching, target-skill requirement, no semantic substitution, state-aware continuation, and lazy loading.
 - `Dosage Contract`, `Decision Policy`, and `Output Contract`, tuned to the gramaje.
+- `Tool Attention Protocol`, with Phase 1 summary routing, precondition gate, Phase 2 lazy loading, active slate, and after-model gate.
+- `Context Budget`, to keep the dosage from loading sibling skills or unrelated references.
+- `Adversarial and Quality Guard`, to reject poisoned descriptions, authority escalation, and cryptic target-skill metadata.
+- `Gramaje Calibration`, with correct examples, incorrect examples, and an explicit autonomy limit.
 - `Recovery Rules`, tuned to the dosage's adherence/flexibility budget.
 - Verification checks for the attention gate and authority boundary.
 
@@ -93,6 +97,10 @@ Update [`CHANGELOG.md`](./CHANGELOG.md) with every version bump.
 - [ ] Shared preconditions are present in both `metadata.attention` and `skills/manifest.json`.
 - [ ] `Attention Gate` includes exact matching, no semantic substitution, state-aware continuation, and lazy loading.
 - [ ] `Dosage Contract`, `Decision Policy`, and `Output Contract` reflect the gramaje.
+- [ ] `Tool Attention Protocol` names Phase 1, preconditions, Phase 2, active slate, and after-model gate.
+- [ ] `Context Budget` limits context expansion for the gramaje.
+- [ ] `Adversarial and Quality Guard` rejects authority escalation and poisoned metadata.
+- [ ] `Gramaje Calibration` clearly distinguishes this skill from neighboring gramajes.
 - [ ] `Recovery Rules` match the dosage strictness.
 - [ ] `When to Use` names at least two concrete trigger phrases.
 - [ ] `Procedure` references the target skill resolution step explicitly.

@@ -1,6 +1,6 @@
 {
   "name": "adderall",
-  "version": "1.4.0",
+  "version": "1.4.2",
   "description": "Dosage-based meta-skill pack for Claude, Cursor, Codex, and Hermes Agent. Control how strictly an agent follows another skill — not just what it does.",
   "type": "module",
   "bin": {
