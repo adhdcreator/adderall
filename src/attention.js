@@ -83,6 +83,13 @@ export async function buildAttentionReport(skillsDir, { codexBlockText = "" } = 
     fullSkillChars += text.length;
     addCheck(checks, text.includes(`name: ${tool.id}`), `${prefix}: frontmatter name matches`);
     addCheck(checks, text.includes("attention:"), `${prefix}: attention metadata exists`);
+    addCheck(checks, text.includes("## Attention Gate"), `${prefix}: attention gate section exists`);
+    addCheck(checks, text.includes("## Dosage Contract"), `${prefix}: dosage contract section exists`);
+    addCheck(checks, text.includes("## Decision Policy"), `${prefix}: decision policy section exists`);
+    addCheck(checks, text.includes("## Output Contract"), `${prefix}: output contract section exists`);
+    addCheck(checks, text.includes("## Recovery Rules"), `${prefix}: recovery rules section exists`);
+    addCheck(checks, text.includes("State-aware continuation"), `${prefix}: state-aware gating is explicit`);
+    addCheck(checks, text.includes("Lazy loading"), `${prefix}: lazy loading is explicit`);
     addCheck(checks, text.includes(`activation: "/${tool.id} /<target-skill> <task>"`), `${prefix}: attention activation matches`);
     addCheck(checks, REQUIRED_PRECONDITIONS.every((p) => text.includes(p)), `${prefix}: attention preconditions present`);
     addCheck(checks, text.includes("may not override system, user, platform, permission"), `${prefix}: authority boundary is explicit`);

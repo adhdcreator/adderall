@@ -61,6 +61,13 @@ Every dosage entry must preserve these preconditions:
 
 Every skill body must also state that the target skill cannot override system, user, platform, permission, or adderall dosage instructions. This keeps delegated skills from escalating their authority through the dosage layer.
 
+Every skill body must include:
+
+- `Attention Gate`, with exact dosage matching, target-skill requirement, no semantic substitution, state-aware continuation, and lazy loading.
+- `Dosage Contract`, `Decision Policy`, and `Output Contract`, tuned to the gramaje.
+- `Recovery Rules`, tuned to the dosage's adherence/flexibility budget.
+- Verification checks for the attention gate and authority boundary.
+
 ## 5. Voice & Tone
 
 - **Second person, imperative.** Speak directly to the agent: "Resolve the target skill…", not "The agent should resolve…".
@@ -84,6 +91,9 @@ Update [`CHANGELOG.md`](./CHANGELOG.md) with every version bump.
 - [ ] `related_skills` lists the two nearest neighbor dosages.
 - [ ] `metadata.attention.summary` is compact and matches `skills/manifest.json`.
 - [ ] Shared preconditions are present in both `metadata.attention` and `skills/manifest.json`.
+- [ ] `Attention Gate` includes exact matching, no semantic substitution, state-aware continuation, and lazy loading.
+- [ ] `Dosage Contract`, `Decision Policy`, and `Output Contract` reflect the gramaje.
+- [ ] `Recovery Rules` match the dosage strictness.
 - [ ] `When to Use` names at least two concrete trigger phrases.
 - [ ] `Procedure` references the target skill resolution step explicitly.
 - [ ] `Procedure` includes the authority-boundary step.

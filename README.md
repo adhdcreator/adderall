@@ -107,6 +107,8 @@ At runtime:
 - **Phase 2:** the full `SKILL.md` is loaded only for the selected dosage.
 - **Hallucination guard:** missing dosages or target skills require clarification; the agent must not invent them.
 - **Authority guard:** the target skill cannot override system, user, platform, permission, or adderall dosage instructions.
+- **State-aware recovery:** each dosage defines how to continue, adapt, ask, report, or halt when later observations change the task.
+- **Dosage contracts:** every gramaje defines its own decision policy and output contract, from exploratory `5mg` to literal `30mg`.
 
 Audit the catalog and approximate context footprint with:
 
@@ -164,7 +166,7 @@ Every skill uses a single unified frontmatter that is valid on all four target p
 ---
 name: adderall-10mg
 description: Balanced execution dosage — adherence 0.50, flexibility 0.50. Use when the user prefixes a target skill with /adderall-10mg.
-version: 1.0.0
+version: 1.1.0
 author: adhdcreator
 license: MIT
 metadata:
@@ -183,6 +185,7 @@ metadata:
 - **Codex** reads the description via the `AGENTS.md` block; skill bodies are accessible under `~/.codex/skills/`.
 - **Hermes** reads the full frontmatter including `metadata.hermes.tags` and `related_skills`.
 - **Tool Attention** reads `metadata.attention` and [`skills/manifest.json`](skills/manifest.json) for compact discovery and precondition checks.
+  Each skill body also carries an `Attention Gate` and dosage-specific `Recovery Rules`.
 
 See [`templates/SKILL.template.md`](templates/SKILL.template.md) for the scaffold, [`AUTHORING.md`](AUTHORING.md) for conventions, and [`INSTALL.md`](INSTALL.md) for the exact rules each platform enforces.
 
