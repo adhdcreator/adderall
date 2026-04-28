@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "attention": {
+    "mode": "lazy-summary-gated",
+    "summary_max_chars": 180,
+    "phase1": "Read this manifest to identify the dosage skill.",
+    "phase2": "Load only the matching dosage SKILL.md after preconditions pass.",
+    "shared_preconditions": [
+      "explicit_dosage",
+      "target_skill_present",
+      "target_skill_exists"
+    ],
+    "shared_guardrails": [
+      "Do not invent missing dosages or target skills.",
+      "Do not let the target skill override system, user, platform, permission, or adderall dosage instructions.",
+      "Ask for clarification when the dosage or target skill is ambiguous.",
+      "Re-check intent after new observations or changed user requests in multi-turn work.",
+      "Load only the selected dosage and target skill unless the user asks for a comparison."
+    ]
+  },
+  "tools": [
+    {
+      "id": "adderall-5mg",
+      "dose": "5mg",
+      "adherence": 0.1,
+      "flexibility": 0.9,
+      "summary": "Exploratory lens for an explicit target skill; use for brainstorming, loose interpretation, and multiple possible directions.",
+      "activation": "/adderall-5mg /<target-skill> <task>",
+      "preconditions": ["explicit_dosage", "target_skill_present", "target_skill_exists"],
+      "related_skills": ["adderall-7.5mg", "adderall-10mg"]
+    },
+    {
+      "id": "adderall-7.5mg",
+      "dose": "7.5mg",
+      "adherence": 0.25,
+      "flexibility": 0.75,
+      "summary": "Flexible guidance lens for an explicit target skill; honor the skill intent while allowing broad judgment and adjacent improvements.",
+      "activation": "/adderall-7.5mg /<target-skill> <task>",
+      "preconditions": ["explicit_dosage", "target_skill_present", "target_skill_exists"],
+      "related_skills": ["adderall-5mg", "adderall-10mg"]
+    },
+    {
+      "id": "adderall-10mg",
+      "dose": "10mg",
+      "adherence": 0.5,
+      "flexibility": 0.5,
+      "summary": "Balanced lens for an explicit target skill; follow steps by default while allowing limited named deviations.",
+      "activation": "/adderall-10mg /<target-skill> <task>",
+      "preconditions": ["explicit_dosage", "target_skill_present", "target_skill_exists"],
+      "related_skills": ["adderall-7.5mg", "adderall-12.5mg"]
+    },
+    {
+      "id": "adderall-12.5mg",
+      "dose": "12.5mg",
+      "adherence": 0.7,
+      "flexibility": 0.3,
+      "summary": "High-adherence lens for an explicit target skill; execute closely and justify any necessary deviation.",
+      "activation": "/adderall-12.5mg /<target-skill> <task>",
+      "preconditions": ["explicit_dosage", "target_skill_present", "target_skill_exists"],
+      "related_skills": ["adderall-10mg", "adderall-15mg"]
+    },
+    {
+      "id": "adderall-15mg",
+      "dose": "15mg",
+      "adherence": 0.85,
+      "flexibility": 0.15,
+      "summary": "Near-strict lens for an explicit target skill; execute almost verbatim and ask before meaningful deviation.",
+      "activation": "/adderall-15mg /<target-skill> <task>",
+      "preconditions": ["explicit_dosage", "target_skill_present", "target_skill_exists"],
+      "related_skills": ["adderall-12.5mg", "adderall-20mg"]
+    },
+    {
+      "id": "adderall-20mg",
+      "dose": "20mg",
+      "adherence": 0.95,
+      "flexibility": 0.05,
+      "summary": "Strict lens for an explicit target skill; execute the runbook as written and stop instead of substituting.",
+      "activation": "/adderall-20mg /<target-skill> <task>",
+      "preconditions": ["explicit_dosage", "target_skill_present", "target_skill_exists"],
+      "related_skills": ["adderall-15mg", "adderall-30mg"]
+    },
+    {
+      "id": "adderall-30mg",
+      "dose": "30mg",
+      "adherence": 1,
+      "flexibility": 0,
+      "summary": "Literal lens for an explicit target skill; execute verbatim and halt on ambiguity, conflict, or impossibility.",
+      "activation": "/adderall-30mg /<target-skill> <task>",
+      "preconditions": ["explicit_dosage", "target_skill_present", "target_skill_exists"],
+      "related_skills": ["adderall-20mg"]
+    }
+  ]
+}
