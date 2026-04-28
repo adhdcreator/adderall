@@ -31,9 +31,10 @@
   ],
   "scripts": {
     "adderall": "node bin/adderall.js",
+    "attention": "node bin/adderall.js attention",
     "doctor": "node bin/adderall.js doctor",
     "list": "node bin/adderall.js list",
-    "test": "node bin/adderall.js doctor && node bin/adderall.js list"
+    "test": "node bin/adderall.js attention && node bin/adderall.js doctor && node bin/adderall.js list"
   },
   "engines": {
     "node": ">=18"

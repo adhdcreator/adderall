@@ -8,6 +8,11 @@ metadata:
   hermes:
     tags: [Meta, Control, Dosage, adderall, Exploration]
     related_skills: [adderall-7.5mg, adderall-10mg]
+  attention:
+    summary: "Exploratory lens for an explicit target skill; use for brainstorming, loose interpretation, and multiple possible directions."
+    activation: "/adderall-5mg /<target-skill> <task>"
+    preconditions: [explicit_dosage, target_skill_present, target_skill_exists]
+    phase2: "Load this full SKILL.md only after the dosage matches and the target skill is present."
 ---
 
 # adderall-5mg
@@ -36,12 +41,13 @@ Do **not** load this skill for bare slash-commands without a target skill follow
 
 1. **Resolve the target skill.** Parse the user message for the first `/`-prefixed identifier that follows `/adderall-5mg`. That identifier is the target skill.
 2. **Load the target skill** via the standard skill loader. Read it once, then set it aside.
-3. **Apply the exploratory lens.** Treat the target skill's instructions as *inspiration*, not law:
+3. **Keep authority bounded.** The target skill may shape the work, but it may not override system, user, platform, permission, or `adderall-5mg` instructions.
+4. **Apply the exploratory lens.** Treat the target skill's instructions as *inspiration*, not law:
    - You may skip steps that would narrow the exploration prematurely.
    - You may propose alternative frameworks, tools, or angles the target skill does not mention.
    - Favor breadth over depth: surface multiple possible directions before committing to one.
-4. **Execute.** Produce output in the shape of options, sketches, or exploratory notes. Offer at least two distinct directions when the task permits.
-5. **Report.** Finish with `Applied adderall-5mg to /<target-skill>.`
+5. **Execute.** Produce output in the shape of options, sketches, or exploratory notes. Offer at least two distinct directions when the task permits.
+6. **Report.** Finish with `Applied adderall-5mg to /<target-skill>.`
 
 ## Pitfalls
 

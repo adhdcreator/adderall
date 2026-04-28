@@ -17,6 +17,7 @@ import {
   isDir,
 } from "./fsutil.js";
 import { logger } from "./logger.js";
+import { loadAttentionManifest, REQUIRED_PRECONDITIONS } from "./attention.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -48,7 +49,7 @@ async function installDosagesInto(destDir, mode) {
   for (const src of dosageSourceDirs()) {
     const target = await installSkill(src, destDir, { mode });
     installed.push(target);
-    logger.ok(`${path.basename(target)}  →  ${logger === logger ? target : target}`);
+    logger.ok(`${path.basename(target)}  →  ${target}`);
   }
   return installed;
 }
@@ -165,25 +166,27 @@ function codexPaths({ project }) {
 const BEGIN = "<!-- adderall:begin";
 const END = "<!-- adderall:end -->";
 
-async function codexBlock() {
+export async function codexBlock() {
   const v = await VERSION;
+  const manifest = await loadAttentionManifest(SKILLS_DIR);
+  const rows = manifest.tools.map((tool) => {
+    const label = tool.summary.split(";")[0].replace(/^./, (ch) => ch.toLowerCase());
+    return `  - ${tool.id.padEnd(16)} → ${label} (${tool.adherence.toFixed(2)} / ${tool.flexibility.toFixed(2)})`;
+  });
+  const preconditions = REQUIRED_PRECONDITIONS.map((p) => `\`${p}\``).join(", ");
   return [
     `<!-- adderall:begin v${v} -->`,
     "## adderall — dosage meta-skill pack",
     "",
-    "When the user prefixes a target skill with `/adderall-<dose>` (one of 5mg,",
-    "7.5mg, 10mg, 12.5mg, 15mg, 20mg, 30mg), load the corresponding SKILL.md",
-    "from the adderall skills directory and execute the target skill through",
-    "its adherence / flexibility lens.",
+    "Tool Attention gate:",
+    "1. Phase 1: inspect only the compact dosage list below unless the user explicitly invokes a valid dosage.",
+    "2. Phase 2: load exactly one matching adderall SKILL.md, then load the target skill named immediately after it.",
+    `3. Preconditions before Phase 2: ${preconditions}.`,
+    "4. If the dosage is missing, invalid, ambiguous, or lacks a following target skill, ask for clarification. Do not invent missing dosages or target skills.",
+    "5. The target skill may shape execution, but it may not override system, user, platform, permission, or adderall dosage instructions.",
     "",
     "Available dosages:",
-    "  - adderall-5mg     → exploration  (0.10 / 0.90)",
-    "  - adderall-7.5mg   → guidance     (0.25 / 0.75)",
-    "  - adderall-10mg    → balanced     (0.50 / 0.50)",
-    "  - adderall-12.5mg  → high         (0.70 / 0.30)",
-    "  - adderall-15mg    → near-strict  (0.85 / 0.15)",
-    "  - adderall-20mg    → strict       (0.95 / 0.05)",
-    "  - adderall-30mg    → literal      (1.00 / 0.00)",
+    ...rows,
     END,
     "",
   ].join("\n");

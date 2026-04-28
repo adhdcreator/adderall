@@ -11,7 +11,9 @@ import {
   PKG_ROOT,
   SKILLS_DIR,
   VERSION,
+  codexBlock,
 } from "./platforms.js";
+import { buildAttentionReport } from "./attention.js";
 
 function parseArgv(argv) {
   const flags = {};
@@ -60,6 +62,8 @@ ${c.bold("Commands:")}
                                platforms: ${PLATFORM_IDS.join(", ")}, all
   ${c.cyan("uninstall <platform>")}      Remove adderall from a platform (or all)
   ${c.cyan("doctor")}                    Report where adderall is installed
+  ${c.cyan("attention")}                 Audit the compact skill catalog and gating rules
+  ${c.cyan("lint")}                      Alias for attention
   ${c.cyan("list")}                      List the 7 dosages and their profiles
   ${c.cyan("info <dose>")}               Print a dosage's SKILL.md
   ${c.cyan("help")}                      Show this screen
@@ -67,6 +71,7 @@ ${c.bold("Commands:")}
 ${c.bold("Options:")}
   --project                  Install at project scope (./.${c.dim("<platform>")}/skills)
   --link                     Use symlinks instead of copies (dev mode)
+  --attention                With doctor, also run the Tool Attention audit
   --no-banner                Suppress the top banner in help output
 
 ${c.bold("Examples:")}
@@ -84,6 +89,9 @@ ${c.bold("Examples:")}
 
   ${c.dim("# Audit current install:")}
   npx adderall doctor
+
+  ${c.dim("# Audit summaries, preconditions, and approximate token budgets:")}
+  npx adderall attention
 `);
 }
 
@@ -117,7 +125,7 @@ async function cmdUninstall(positional, flags) {
   await p.uninstall(flags);
 }
 
-async function cmdDoctor() {
+async function cmdDoctor(flags = {}) {
   const v = await VERSION;
   logger.info(`adderall v${v} — installation report`);
   for (const id of PLATFORM_IDS) {
@@ -133,6 +141,29 @@ async function cmdDoctor() {
       }
     }
   }
+  if (flags.attention) {
+    logger.plain();
+    await cmdAttention();
+  }
+}
+
+async function cmdAttention() {
+  const report = await buildAttentionReport(SKILLS_DIR, { codexBlockText: await codexBlock() });
+  logger.info("Tool Attention audit");
+  const status = report.ok ? c.green("pass") : c.red("fail");
+  logger.plain(`  status                 ${status}`);
+  logger.plain(`  tools                  ${report.metrics.tool_count}`);
+  logger.plain(`  summaries only         ~${report.metrics.summaries_only_tokens} tokens`);
+  logger.plain(`  compact manifest       ~${report.metrics.compact_manifest_tokens} tokens`);
+  logger.plain(`  full SKILL.md catalog  ~${report.metrics.full_skill_tokens} tokens`);
+  logger.plain(`  Codex gate block       ~${report.metrics.codex_block_tokens} tokens`);
+  logger.plain();
+  for (const check of report.checks) {
+    const icon = check.ok ? c.green("✓") : c.red("✗");
+    const detail = check.detail ? `  ${c.dim(check.detail)}` : "";
+    logger.plain(`  ${icon} ${check.label}${detail}`);
+  }
+  if (!report.ok) process.exitCode = 1;
 }
 
 async function cmdList() {
@@ -185,7 +216,9 @@ export async function main(argv) {
   switch (command) {
     case "install":    return cmdInstall(rest, flags);
     case "uninstall":  return cmdUninstall(rest, flags);
-    case "doctor":     return cmdDoctor();
+    case "doctor":     return cmdDoctor(flags);
+    case "attention":  return cmdAttention();
+    case "lint":       return cmdAttention();
     case "list":       return cmdList();
     case "info":       return cmdInfo(rest);
     default:           logger.fail(`unknown command: ${command}  (try 'adderall help')`);

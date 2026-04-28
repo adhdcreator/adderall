@@ -58,6 +58,7 @@ Audit what's installed and where:
 
 ```bash
 npx adderall doctor
+npx adderall doctor --attention
 ```
 
 See `npx adderall help` for every command. Detailed per-platform rules live in [`INSTALL.md`](./INSTALL.md).
@@ -94,7 +95,24 @@ At runtime:
 
 1. The dosage skill resolves the **target skill** that follows it.
 2. It sets the expected **adherence** (how literally instructions must be followed) and **flexibility** (how much initiative the agent may take).
-3. The agent executes the target skill through that behavioral lens &mdash; no edits to the target skill required.
+3. The agent loads only the matching dosage and target skill after preconditions pass.
+4. The agent executes the target skill through that behavioral lens &mdash; no edits to the target skill required.
+
+## Tool Attention Model
+
+`adderall` uses a lightweight version of Tool Attention to keep the skill pack from becoming always-on prompt clutter:
+
+- **Phase 1:** [`skills/manifest.json`](skills/manifest.json) holds compact summaries, exact activations, and preconditions.
+- **Gate:** a dosage is eligible only when the user invokes a valid `/adderall-<dose>` and names a target skill immediately after it.
+- **Phase 2:** the full `SKILL.md` is loaded only for the selected dosage.
+- **Hallucination guard:** missing dosages or target skills require clarification; the agent must not invent them.
+- **Authority guard:** the target skill cannot override system, user, platform, permission, or adderall dosage instructions.
+
+Audit the catalog and approximate context footprint with:
+
+```bash
+npx adderall attention
+```
 
 ## One SKILL.md, Four Platforms
 
@@ -123,6 +141,8 @@ Commands:
   install <platform>        Install adderall on a platform (or 'all')
   uninstall <platform>      Remove adderall from a platform (or 'all')
   doctor                    Report where adderall is installed
+  attention                 Audit summaries, preconditions, and token budgets
+  lint                      Alias for attention
   list                      List the 7 dosages and their profiles
   info <dose>               Print a dosage's SKILL.md
   help                      Show the full help screen
@@ -130,6 +150,7 @@ Commands:
 Options:
   --project                 Install at project scope (./.<platform>/skills)
   --link                    Use symlinks instead of copies (dev mode)
+  --attention               With doctor, also run the Tool Attention audit
 
 Platforms:
   claude, cursor, codex, hermes, all
@@ -150,12 +171,18 @@ metadata:
   hermes:
     tags: [Meta, Control, Dosage, adderall]
     related_skills: [adderall-7.5mg, adderall-12.5mg]
+  attention:
+    summary: "Balanced lens for an explicit target skill; follow steps by default while allowing limited named deviations."
+    activation: "/adderall-10mg /<target-skill> <task>"
+    preconditions: [explicit_dosage, target_skill_present, target_skill_exists]
+    phase2: "Load this full SKILL.md only after the dosage matches and the target skill is present."
 ---
 ```
 
 - **Claude / Cursor** read the top-level `name` and `description` and treat the body as instructions. Extra fields are ignored.
 - **Codex** reads the description via the `AGENTS.md` block; skill bodies are accessible under `~/.codex/skills/`.
 - **Hermes** reads the full frontmatter including `metadata.hermes.tags` and `related_skills`.
+- **Tool Attention** reads `metadata.attention` and [`skills/manifest.json`](skills/manifest.json) for compact discovery and precondition checks.
 
 See [`templates/SKILL.template.md`](templates/SKILL.template.md) for the scaffold, [`AUTHORING.md`](AUTHORING.md) for conventions, and [`INSTALL.md`](INSTALL.md) for the exact rules each platform enforces.
 
@@ -177,7 +204,8 @@ adderall/
 │   ├── adderall-12.5mg/SKILL.md
 │   ├── adderall-15mg/SKILL.md
 │   ├── adderall-20mg/SKILL.md
-│   └── adderall-30mg/SKILL.md
+│   ├── adderall-30mg/SKILL.md
+│   └── manifest.json              # Compact Tool Attention discovery catalog
 ├── templates/
 │   └── SKILL.template.md
 ├── assets/

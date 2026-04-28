@@ -2,6 +2,18 @@
 
 All notable changes to `adderall` are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+### Added
+- Compact Tool Attention catalog at `skills/manifest.json` for summary-first dosage discovery and lazy full-skill loading.
+- `metadata.attention` blocks on every dosage skill with summaries, exact activation strings, and shared preconditions.
+- `adderall attention` / `adderall lint` audit command for summaries, preconditions, authority boundaries, and approximate token budgets.
+- `doctor --attention` to include the Tool Attention audit in installation reports.
+
+### Changed
+- Codex `AGENTS.md` block now includes a Tool Attention gate, explicit Phase 1 / Phase 2 behavior, preconditions, and hallucination/authority guards.
+- `npm test` now runs the Tool Attention audit before the existing CLI smoke checks.
+
 ## [1.3.0] — 2026-04-21
 
 ### Added

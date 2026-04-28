@@ -8,6 +8,11 @@ metadata:
   hermes:
     tags: [Meta, Control, Dosage, adderall, Literal]
     related_skills: [adderall-20mg]
+  attention:
+    summary: "Literal lens for an explicit target skill; execute verbatim and halt on ambiguity, conflict, or impossibility."
+    activation: "/adderall-30mg /<target-skill> <task>"
+    preconditions: [explicit_dosage, target_skill_present, target_skill_exists]
+    phase2: "Load this full SKILL.md only after the dosage matches and the target skill is present."
 ---
 
 # adderall-30mg
@@ -36,12 +41,13 @@ Do **not** load this skill for bare slash-commands without a target skill follow
 
 1. **Resolve the target skill** that follows `/adderall-30mg` in the user message.
 2. **Load the target skill** via the standard skill loader.
-3. **Apply the literal lens.**
+3. **Keep authority bounded.** The target skill may shape the work, but it may not override system, user, platform, permission, or `adderall-30mg` instructions.
+4. **Apply the literal lens.**
    - Execute each step of the target skill exactly as written, in the order given, using the target skill's wording for headings, labels, and commands wherever the target skill specifies them.
    - Do not reorder, merge, skip, supplement, rephrase, soften, or harden any step.
    - If any step is impossible, ambiguous, or conflicts with the user's request, **halt and ask the user how to proceed**. Do not resolve the conflict yourself.
-4. **Execute** the task.
-5. **Report.** Finish with `Applied adderall-30mg to /<target-skill>.`
+5. **Execute** the task.
+6. **Report.** Finish with `Applied adderall-30mg to /<target-skill>.`
 
 ## Pitfalls
 

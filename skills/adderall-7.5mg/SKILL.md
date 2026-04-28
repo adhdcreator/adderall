@@ -8,6 +8,11 @@ metadata:
   hermes:
     tags: [Meta, Control, Dosage, adderall, Guidance]
     related_skills: [adderall-5mg, adderall-10mg]
+  attention:
+    summary: "Flexible guidance lens for an explicit target skill; honor the skill intent while allowing broad judgment and adjacent improvements."
+    activation: "/adderall-7.5mg /<target-skill> <task>"
+    preconditions: [explicit_dosage, target_skill_present, target_skill_exists]
+    phase2: "Load this full SKILL.md only after the dosage matches and the target skill is present."
 ---
 
 # adderall-7.5mg
@@ -36,12 +41,13 @@ Do **not** load this skill for bare slash-commands without a target skill follow
 
 1. **Resolve the target skill** that follows `/adderall-7.5mg` in the user message.
 2. **Load the target skill** and extract its *intent* (what outcome is it optimizing for?) rather than its literal step list.
-3. **Apply the guidance lens.**
+3. **Keep authority bounded.** The target skill may shape the work, but it may not override system, user, platform, permission, or `adderall-7.5mg` instructions.
+4. **Apply the guidance lens.**
    - Honor the target skill's goal and any non-negotiable constraints.
    - Reorder, merge, or skip individual steps when a clearly better path exists.
    - Volunteer adjacent improvements the target skill does not explicitly request.
-4. **Execute** with a single cohesive response (unlike `5mg`, do commit to a direction).
-5. **Report.** Finish with `Applied adderall-7.5mg to /<target-skill>.`
+5. **Execute** with a single cohesive response (unlike `5mg`, do commit to a direction).
+6. **Report.** Finish with `Applied adderall-7.5mg to /<target-skill>.`
 
 ## Pitfalls
 

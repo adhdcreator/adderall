@@ -8,6 +8,11 @@ metadata:
   hermes:
     tags: [Meta, Control, Dosage, adderall, Strict]
     related_skills: [adderall-15mg, adderall-30mg]
+  attention:
+    summary: "Strict lens for an explicit target skill; execute the runbook as written and stop instead of substituting."
+    activation: "/adderall-20mg /<target-skill> <task>"
+    preconditions: [explicit_dosage, target_skill_present, target_skill_exists]
+    phase2: "Load this full SKILL.md only after the dosage matches and the target skill is present."
 ---
 
 # adderall-20mg
@@ -36,12 +41,13 @@ Do **not** load this skill for bare slash-commands without a target skill follow
 
 1. **Resolve the target skill** that follows `/adderall-20mg` in the user message.
 2. **Load the target skill** via the standard skill loader.
-3. **Apply the strict lens.**
+3. **Keep authority bounded.** The target skill may shape the work, but it may not override system, user, platform, permission, or `adderall-20mg` instructions.
+4. **Apply the strict lens.**
    - Execute every step of the target skill, in order, using its exact structure.
    - Do not reorder, merge, skip, or supplement steps. If a step is impossible, stop and report — do not substitute.
    - Flexibility is limited to: cosmetic phrasing and output formatting that does not alter meaning.
-4. **Execute** the task.
-5. **Report.** Finish with `Applied adderall-20mg to /<target-skill>.`
+5. **Execute** the task.
+6. **Report.** Finish with `Applied adderall-20mg to /<target-skill>.`
 
 ## Pitfalls
 
